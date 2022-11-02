@@ -1,8 +1,6 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 -- Only required if you have packer configured as `opt`
---
--- -- vim.cmd [[packadd packer.nvim]]-- Lua initialization file
-
+vim.cmd([[packadd packer.nvim]]) -- Lua initialization file
 -- autocommand that reloads neovim and installs/updates/removes plugins
 -- when file is saved
 vim.cmd([[
@@ -11,25 +9,22 @@ vim.cmd([[
     autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
   augroup end
 ]])
-
 vim.cmd([[
 if executable('macism')
     autocmd InsertLeave * :call system("macism com.apple.keylayout.ABC")
     autocmd CmdlineLeave * :call system("macism com.apple.keylayout.ABC") 
 endif
 ]])
-require("core.options")
+
 local vscode = (vim.fn.exists("g:vscode") == 1)
 if vscode == false then
-	require("Comment").setup()
 	vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
-	require("bufferline").setup({})
-	-- vim.cmd([[colorscheme zenbones]])
-	-- disable netrw at the very start of your init.lua (strongly advised)
 	vim.g.loaded_netrw = 1
 	vim.g.loaded_netrwin = 1
-	-- set termguicolors to enable highlight groups
 	vim.opt.termguicolors = true
+	require("core.options")
+	require("Comment").setup()
+	require("bufferline").setup({})
 	require("plugins.dashboard")
 	require("core.keymaps")
 	-- require("core.colorscheme")
@@ -49,8 +44,8 @@ if vscode == false then
 	require("plugins.out-lines")
 	require("plugins.vimtex")
 	require("plugins")
-	-- require("plugins.cinnamon")
 else
+	require("core.options")
 	require("core.keymaps-vscode")
 	require("plugins-vscode")
 end
