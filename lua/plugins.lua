@@ -54,6 +54,7 @@ if vscode == false then
 	require("plugins.treesitter")
 	require("plugins.gitsigns")
 	require("plugins.out-lines")
+	require("plugins.vimtex")
 	-- require("plugins.cinnamon")
 end
 local status, packer = pcall(require, "packer")
@@ -268,6 +269,10 @@ return require("packer").startup(function(use)
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "kyazdani42/nvim-web-devicons", disable = vscode })
 	-- use({ "neoclide/coc.nvim", branch = "release", disable = vscode })
 	-- use("quangnguyen30192/cmp-nvim-ultisnips")
+	use({
+		"lervag/vimtex",
+		disable = vscode,
+	})
 	if packer_bootstrap then
 		require("packer").sync()
 	end
