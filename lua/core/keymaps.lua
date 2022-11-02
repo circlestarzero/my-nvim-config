@@ -3,17 +3,17 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap -- for conciseness
 
----------------------
 -- General Keymaps
 ---------------------
 
 -- use jk to exit insert mode
 -- keymap.set("n", "<leader>tb", ":SymbolsOutline<CR>")
-keymap.set("i", "jk", "<ESC>")
+-- keymap.set("i", "jk", "<ESC>")
 
 -- clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>")
-
+keymap.set("n", "H", "^")
+keymap.set("n", "L", "$")
 -- delete single character without copying into register
 keymap.set("n", "x", '"_x')
 
@@ -56,4 +56,16 @@ keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git bra
 keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
 
 -- restart lsp server (not on youtube nvim video)
-keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+keymap.set("", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+
+keymap.set("", "<Leader>b", "<Plug>(easymotion-b)", { noremap = false, silent = true })
+keymap.set("", "<Leader>w", "<Plug>(easymotion-w)", { noremap = false, silent = true })
+keymap.set("", "<Leader>l", "<Plug>(easymotion-lineforward)", { noremap = false, silent = true })
+keymap.set("", "<Leader>j", "<Plug>(easymotion-j)", { noremap = false, silent = true })
+keymap.set("", "<Leader>k", "<Plug>(easymotion-k)", { noremap = false, silent = true })
+keymap.set("", "<Leader>h", "<Plug>(easymotion-linebackward)", { noremap = false, silent = true })
+
+keymap.set("n", "<Leader><Leader>f", function()
+	require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ winblend = 10 }))
+end, { desc = "telescope find files" })
+keymap.set("n", "<F2>", ":NvimTreeToggle<CR>", { desc = "NvimTreeToggle" })
