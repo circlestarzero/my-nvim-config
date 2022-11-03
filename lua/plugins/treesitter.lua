@@ -4,6 +4,7 @@ if not status then
 	return
 end
 
+require("nvim-treesitter.install").update({ with_sync = true })
 -- configure treesitter
 treesitter.setup({
 	-- enable syntax highlighting

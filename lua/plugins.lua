@@ -9,6 +9,7 @@ local ensure_packer = function()
 	return false
 end
 local packer_bootstrap = ensure_packer() -- true if packer was just installed
+local notVscode = (vim.fn.exists("g:vscode") == 1) == false
 return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
@@ -41,15 +42,9 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-telescope/telescope-file-browser.nvim",
 	})
-
 	use({
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end,
 	})
 	use({
 		"nvim-lualine/lualine.nvim",
@@ -82,20 +77,12 @@ return require("packer").startup(function(use)
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"circlestarzero/nvim-cmp",
-		-- "SirVer/ultisnips",
 		"circlestarzero/my-snippet",
 		"quangnguyen30192/cmp-nvim-ultisnips",
 	})
 	use({
 		"SirVer/ultisnips",
 		requires = { { "honza/vim-snippets", rtp = "." } },
-		config = function()
-			vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-			vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
-			vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
-			vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
-			vim.g.UltiSnipsRemoveSelectModeMappings = 0
-		end,
 	})
 
 	use({ "nvim-lua/plenary.nvim" }) -- lua functions that many plugins use
@@ -146,12 +133,6 @@ return require("packer").startup(function(use)
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",
-		config = function()
-			require("catppuccin").setup({
-				flavour = "macchiato", -- mocha, macchiato, frappe, latte
-			})
-			vim.api.nvim_command("colorscheme catppuccin")
-		end,
 	})
 	use({
 		"godlygeek/tabular",
@@ -177,6 +158,7 @@ return require("packer").startup(function(use)
 	use({
 		"lervag/vimtex",
 	})
+	-- use({ "asvetliakov/vim-easymotion", disable = notVscode })
 	if packer_bootstrap then
 		require("packer").sync()
 	end
