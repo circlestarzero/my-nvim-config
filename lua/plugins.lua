@@ -9,6 +9,7 @@ local ensure_packer = function()
 	return false
 end
 local vscode = (vim.fn.exists("g:vscode") == 1)
+local notVscode = vscode == false
 local packer_bootstrap = ensure_packer() -- true if packer was just installed
 -- local notVscode = (vim.fn.exists("g:vscode") == 1) == false
 return require("packer").startup(function(use)
@@ -125,7 +126,8 @@ return require("packer").startup(function(use)
 	-- git integration
 	use({ "lewis6991/gitsigns.nvim" }) -- show line modifications on left hand side
 
-	use({ "circlestarzero/vim-easymotionvim", disable = vscode })
+	use({ "circlestarzero/vim-easymotionvim", cond = notVscode })
+	use({ "asvetliakov/vim-easymotion", cond = vscode })
 
 	use("unblevable/quick-scope")
 	use({

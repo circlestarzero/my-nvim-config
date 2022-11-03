@@ -7,7 +7,7 @@ local keymap = vim.keymap -- for conciseness
 ---------------------
 
 -- use jk to exit insert mode
--- keymap.set("n", "<leader>tb", ":SymbolsOutline<CR>")
+keymap.set("n", "<leader>tb", ":SymbolsOutline<CR>")
 -- keymap.set("i", "jk", "<ESC>")
 
 -- clear search highlights
@@ -31,8 +31,8 @@ keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
-
-----------------------
+keymap.set("n", "<leader>bp", ":bp<CR>") --  go to previous tab
+keymap.set("n", "<leader>bn", ":bn<CR>") --  go to previous tab
 -- Plugin Keybinds
 ----------------------
 
@@ -58,7 +58,7 @@ keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current c
 -- restart lsp server (not on youtube nvim video)
 keymap.set("", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
-keymap.set("", "<Leader>b", "<Plug>(easymotionvim-b)", { noremap = false, silent = true })
+-- keymap.set("", "<Leader>b", "<Plug>(easymotionvim-b)", { noremap = false, silent = true })
 keymap.set("", "<Leader>w", "<Plug>(easymotionvim-w)", { noremap = false, silent = true })
 keymap.set("", "<Leader>l", "<Plug>(easymotionvim-lineforward)", { noremap = false, silent = true })
 keymap.set("", "<Leader>j", "<Plug>(easymotionvim-j)", { noremap = false, silent = true })
@@ -68,4 +68,4 @@ keymap.set("", "<Leader>h", "<Plug>(easymotionvim-linebackward)", { noremap = fa
 keymap.set("n", "<Leader><Leader>f", function()
 	require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ winblend = 10 }))
 end, { desc = "telescope find files" })
-keymap.set("n", "<F2>", ":NvimTreeToggle<CR>", { desc = "NvimTreeToggle" })
+keymap.set("", "<Leader>fl", ":NvimTreeToggle<CR>", { desc = "NvimTreeToggle" })
