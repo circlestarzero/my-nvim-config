@@ -161,6 +161,25 @@ return require("packer").startup(function(use)
 	use({
 		"lervag/vimtex",
 	})
+	use({
+		"goolord/alpha-nvim",
+		config = function()
+			require("alpha").setup(require("alpha.themes.dashboard").config)
+		end,
+	})
+	use({
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function()
+			require("telescope").load_extension("frecency")
+		end,
+		requires = { "kkharji/sqlite.lua" },
+	})
+	use({
+		"nvim-telescope/telescope-project.nvim",
+		config = function()
+			require("telescope").load_extension("project")
+		end,
+	})
 	-- use({ "asvetliakov/vim-easymotion", disable = notVscode })
 	if packer_bootstrap then
 		require("packer").sync()
