@@ -8,12 +8,13 @@ local ensure_packer = function()
 	end
 	return false
 end
+local notVscode = (vim.fn.exists("g:vscode") == 1) == false
 local packer_bootstrap = ensure_packer() -- true if packer was just installed
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use({ "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } })
 	use({ "andymass/vim-matchup", event = "VimEnter" })
-	use("asvetliakov/vim-easymotion")
+	use({ "asvetliakov/vim-easymotion", disable = notVscode })
 	use({ "sharkdp/fd" })
 	use({ "wellle/targets.vim" })
 	use({

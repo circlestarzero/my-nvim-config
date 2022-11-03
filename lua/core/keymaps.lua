@@ -58,12 +58,12 @@ keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current c
 -- restart lsp server (not on youtube nvim video)
 keymap.set("", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
-keymap.set("", "<Leader>b", "<Plug>(easymotion-b)", { noremap = false, silent = true })
-keymap.set("", "<Leader>w", "<Plug>(easymotion-w)", { noremap = false, silent = true })
-keymap.set("", "<Leader>l", "<Plug>(easymotion-lineforward)", { noremap = false, silent = true })
-keymap.set("", "<Leader>j", "<Plug>(easymotion-j)", { noremap = false, silent = true })
-keymap.set("", "<Leader>k", "<Plug>(easymotion-k)", { noremap = false, silent = true })
-keymap.set("", "<Leader>h", "<Plug>(easymotion-linebackward)", { noremap = false, silent = true })
+keymap.set("", "<Leader>b", "<Plug>(easymotionvim-b)", { noremap = false, silent = true })
+keymap.set("", "<Leader>w", "<Plug>(easymotionvim-w)", { noremap = false, silent = true })
+keymap.set("", "<Leader>l", "<Plug>(easymotionvim-lineforward)", { noremap = false, silent = true })
+keymap.set("", "<Leader>j", "<Plug>(easymotionvim-j)", { noremap = false, silent = true })
+keymap.set("", "<Leader>k", "<Plug>(easymotionvim-k)", { noremap = false, silent = true })
+keymap.set("", "<Leader>h", "<Plug>(easymotionvim-linebackward)", { noremap = false, silent = true })
 
 keymap.set("n", "<Leader><Leader>f", function()
 	require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ winblend = 10 }))

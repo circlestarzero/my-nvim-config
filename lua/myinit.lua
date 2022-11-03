@@ -4,12 +4,6 @@ vim.cmd([[packadd packer.nvim]]) -- Lua initialization file
 -- autocommand that reloads neovim and installs/updates/removes plugins
 -- when file is saved
 vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
-  augroup end
-]])
-vim.cmd([[
 if executable('macism')
     autocmd InsertLeave * :call system("macism com.apple.keylayout.ABC")
     autocmd CmdlineLeave * :call system("macism com.apple.keylayout.ABC") 
@@ -17,11 +11,17 @@ endif
 ]])
 
 local vscode = (vim.fn.exists("g:vscode") == 1)
+print(vscode)
 if vscode == false then
+	vim.cmd([[
+      augroup packer_user_config
+      autocmd!
+      autocmd BufWritePost plugins.lua source <afile> | PackerSync
+      augroup end
+    ]])
 	vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 	vim.g.loaded_netrw = 1
 	vim.g.loaded_netrwin = 1
-	vim.opt.termguicolors = true
 	require("plugins")
 	require("core.options")
 	require("Comment").setup()
@@ -47,6 +47,12 @@ if vscode == false then
 	require("plugins.ultisnips")
 	require("plugins.nvim-surround")
 else
+	vim.cmd([[
+      augroup packer_user_config
+      autocmd!
+      autocmd BufWritePost plugins-vscode.lua source <afile> | PackerSync
+      augroup end
+    ]])
 	require("core.options")
 	require("core.keymaps-vscode")
 	require("plugins-vscode")
