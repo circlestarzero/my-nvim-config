@@ -1,19 +1,9 @@
-" let mapleader = "\<space>"
-" lua require('nvim')
+lua require('myinit')
 " augroup packer_user_config
 "   autocmd!
 "   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 " augroup end
-" 当打开nvim时，若没有下载vim-plug则自动下载
 " if empty(glob('~/.config/nvim/autoload/plug.vim'))
 "     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-" endif
-
-" if exists('g:vscode')
-"     call plug#begin('~/.config/nvim/autoload/')
-"         " 快速跳转
-"         Plug 'asvetliakov/vim-easymotion'
-"         " 包裹修改
-"     call plug#end()
 " endif
