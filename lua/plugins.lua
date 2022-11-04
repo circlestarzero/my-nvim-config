@@ -126,7 +126,7 @@ return require("packer").startup(function(use)
 	-- git integration
 	use({ "lewis6991/gitsigns.nvim" }) -- show line modifications on left hand side
 
-	use({ "circlestarzero/vim-easymotionvim", cond = notVscode })
+	-- use({ "circlestarzero/vim-easymotionvim", cond = notVscode })
 	use({ "asvetliakov/vim-easymotion", cond = vscode })
 
 	use("unblevable/quick-scope")
@@ -178,6 +178,14 @@ return require("packer").startup(function(use)
 		"nvim-telescope/telescope-project.nvim",
 		config = function()
 			require("telescope").load_extension("project")
+		end,
+	})
+	use({
+		"phaazon/hop.nvim",
+		branch = "v2", -- optional but strongly recommended
+		config = function()
+			-- you can configure Hop the way you like here; see :h hop-config
+			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 		end,
 	})
 	-- use({ "asvetliakov/vim-easymotion", disable = notVscode })

@@ -31,8 +31,21 @@ keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
-keymap.set("n", "<leader>bp", ":bp<CR>") --  go to previous tab
-keymap.set("n", "<leader>bn", ":bn<CR>") --  go to previous tab
+-- keymap.del("o", "A")
+keymap.set("n", "<Leader>ps", ":PackerSync<CR>") --  go to previous tab
+keymap.set("n", "<Leader>bg", ":BufferLinePick<CR>") --  go to previous tab
+keymap.set("n", "<Leader>bc", ":BufferLinePickClose<CR>") --  go to previous tab
+keymap.set("n", "<Leader>bp", ":BufferLineCyclePrev<CR>") --  go to previous tab
+keymap.set("n", "<Leader>bn", ":BufferLineCycleNext<CR>") --  go to previous tab
+keymap.set("n", "<Leader>1", ":BufferLineGoToBuffer 1<CR>") --  go to previous tab
+keymap.set("n", "<Leader>2", ":BufferLineGoToBuffer 2<CR>") --  go to previous tab
+keymap.set("n", "<Leader>3", ":BufferLineGoToBuffer 3<CR>") --  go to previous tab
+keymap.set("n", "<Leader>4", ":BufferLineGoToBuffer 4<CR>") --  go to previous tab
+keymap.set("n", "<Leader>5", ":BufferLineGoToBuffer 5<CR>") --  go to previous tab
+keymap.set("n", "<Leader>6", ":BufferLineGoToBuffer 6<CR>") --  go to previous tab
+keymap.set("n", "<Leader>7", ":BufferLineGoToBuffer 7<CR>") --  go to previous tab
+keymap.set("n", "<Leader>8", ":BufferLineGoToBuffer 8<CR>") --  go to previous tab
+keymap.set("n", "<Leader>9", ":BufferLineGoToBuffer 9<CR>") --  go to previous tab
 -- Plugin Keybinds
 ----------------------
 
@@ -56,16 +69,17 @@ keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git bra
 keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
 
 -- restart lsp server (not on youtube nvim video)
-keymap.set("", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+keymap.set("", "<leader>lr", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+keymap.set("", "<leader>li", ":LspInfo<CR>") -- mapping to restart lsp if necessary
 
 -- keymap.set("", "<Leader>b", "<Plug>(easymotionvim-b)", { noremap = false, silent = true })
-keymap.set("", "<Leader>w", "<Plug>(easymotionvim-w)", { noremap = false, silent = true })
-keymap.set("", "<Leader>l", "<Plug>(easymotionvim-lineforward)", { noremap = false, silent = true })
-keymap.set("", "<Leader>j", "<Plug>(easymotionvim-j)", { noremap = false, silent = true })
-keymap.set("", "<Leader>k", "<Plug>(easymotionvim-k)", { noremap = false, silent = true })
-keymap.set("", "<Leader>h", "<Plug>(easymotionvim-linebackward)", { noremap = false, silent = true })
+keymap.set("", "<Leader>w", "<cmd>HopWord<cr>")
+keymap.set("", "<Leader>j", "<cmd>HopLine<cr>")
+keymap.set("", "<Leader>k", "<cmd>HopLine<cr>")
+keymap.set("", "<Leader>c", "<cmd>HopChar1<cr>")
+keymap.set("", "<Leader>cc", "<cmd>HopChar2<cr>")
 
-keymap.set("n", "<Leader><Leader>f", function()
-	require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ winblend = 10 }))
-end, { desc = "telescope find files" })
 keymap.set("", "<Leader>fl", ":NvimTreeToggle<CR>", { desc = "NvimTreeToggle" })
+keymap.set("n", "<Leader>fe", "<cmd>Telescope oldfiles<cr>")
+keymap.set("n", "<Leader>fw", "<cmd>Telescope live_grep<cr>")
+keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files<cr>")
