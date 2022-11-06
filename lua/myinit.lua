@@ -11,7 +11,6 @@ endif
 ]])
 
 local vscode = (vim.fn.exists("g:vscode") == 1)
-print(vscode)
 if vscode == false then
 	vim.cmd([[
       augroup packer_user_config
@@ -22,6 +21,8 @@ if vscode == false then
 	vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 	vim.g.loaded_netrw = 1
 	vim.g.loaded_netrwin = 1
+    vim.g.CoolTotalMatche = 1
+
 	require("plugins")
 	require("core.options")
 	require("Comment").setup()
@@ -46,6 +47,7 @@ if vscode == false then
 	require("plugins.vimtex")
 	require("plugins.ultisnips")
 	require("plugins.nvim-surround")
+    require("plugins.accelerated-jk")
 else
 	vim.cmd([[
       augroup packer_user_config

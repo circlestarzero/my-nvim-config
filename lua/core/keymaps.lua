@@ -83,3 +83,30 @@ keymap.set("", "<Leader>fl", ":NvimTreeToggle<CR>", { desc = "NvimTreeToggle" })
 keymap.set("n", "<Leader>fe", "<cmd>Telescope oldfiles<cr>")
 keymap.set("n", "<Leader>fw", "<cmd>Telescope live_grep<cr>")
 keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files<cr>")
+
+keymap.set("n","ga","<Plug>(EasyAlign)")
+keymap.set("x","ga","<Plug>(EasyAlign)")
+
+keymap.set("o","m",":<C-U>lua require('tsht').nodes()<CR>")
+keymap.set("x","m",":lua require('tsht').nodes()<CR>")
+keymap.set('n', 'j', '<Plug>(accelerated_jk_gj)', {})
+keymap.set('n', 'k', '<Plug>(accelerated_jk_gk)', {})
+
+keymap.set('','f','<Plug>(eft-f)')
+keymap.set('','F','<Plug>(eft-F)')
+keymap.set('','t','<Plug>(eft-t)')
+keymap.set('','T','<Plug>(eft-T)')
+keymap.set('',';','<Plug>(eft-repeat)')
+
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

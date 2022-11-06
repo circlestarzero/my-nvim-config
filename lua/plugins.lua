@@ -16,7 +16,7 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 	use({ "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } })
-	use({ "andymass/vim-matchup", event = "VimEnter" })
+	use({ "andymass/vim-matchup", event = "VimEnter" , after = 'nvim-treesitter'})
 	use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install", cmd = "MarkdownPreview" })
 	-- use({
 	-- 	"glacambre/firenvim",
@@ -188,7 +188,30 @@ return require("packer").startup(function(use)
 			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 		end,
 	})
-	-- use({ "asvetliakov/vim-easymotion", disable = notVscode })
+    use({
+        "junegunn/vim-easy-align",
+    })
+    use({
+        "RRethy/vim-illuminate",
+    })
+    use({
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        'p00f/nvim-ts-rainbow',
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        'mfussenegger/nvim-treehopper',
+        after = "nvim-treesitter",
+    })
+    use { 'rainbowhxch/accelerated-jk.nvim' }
+    use{"hrsh7th/vim-eft", opt = true,event = "BufReadPost" }
+    use({"romainl/vim-cool",opt = true,event = { "CursorMoved", "InsertEnter" },})
+    use { 'karb94/neoscroll.nvim' ,
+        config = function()
+            require('neoscroll').setup()
+        end,
+    }
+    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+        require("toggleterm").setup()
+    end}
 	if packer_bootstrap then
 		require("packer").sync()
 	end

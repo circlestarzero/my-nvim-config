@@ -29,7 +29,7 @@ return require("packer").startup(function(use)
 	use({
 		"vim-scripts/ReplaceWithRegister",
 	})
-	use({ "nvim-lua/plenary.nvim" }) -- lua functions that many plugins use
+	use( "nvim-lua/plenary.nvim" ) -- lua functions that many plugins use
 	use("unblevable/quick-scope")
 	if packer_bootstrap then
 		require("packer").sync()
