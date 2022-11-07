@@ -45,9 +45,10 @@ if vscode == false then
 	require("plugins.gitsigns")
 	require("plugins.out-lines")
 	require("plugins.vimtex")
-	require("plugins.ultisnips")
 	require("plugins.nvim-surround")
     require("plugins.accelerated-jk")
+    require("plugins.toggleterm")
+    -- require("plugins.auto-session")
 else
 	vim.cmd([[
       augroup packer_user_config

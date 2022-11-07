@@ -11,6 +11,7 @@ end
 local vscode = (vim.fn.exists("g:vscode") == 1)
 local notVscode = vscode == false
 local packer_bootstrap = ensure_packer() -- true if packer was just installed
+local sessions_dir = vim.fn.stdpath("data") .. "/sessions/"
 -- local notVscode = (vim.fn.exists("g:vscode") == 1) == false
 return require("packer").startup(function(use)
 	-- Packer can manage itself
@@ -82,21 +83,26 @@ return require("packer").startup(function(use)
 		"circlestarzero/my-snippet",
 		"quangnguyen30192/cmp-nvim-ultisnips",
 	})
-	use({
-		"SirVer/ultisnips",
-		requires = { { "honza/vim-snippets", rtp = "." } },
-	})
+    use {'SirVer/ultisnips',
+        requires = {{'honza/vim-snippets', rtp = '.'}},
+        config = function()      
+            vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'      
+            vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
+            vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
+            vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
+            vim.g.UltiSnipsRemoveSelectModeMappings = 0
+        end
+    }
+    use({ "nvim-lua/plenary.nvim" }) -- lua functions that many plugins use
 
-	use({ "nvim-lua/plenary.nvim" }) -- lua functions that many plugins use
+    use({ "christoomey/vim-tmux-navigator" }) -- tmux & split window navigation
 
-	use({ "christoomey/vim-tmux-navigator" }) -- tmux & split window navigation
+    use({ "szw/vim-maximizer" }) -- maximizes and restores current window
 
-	use({ "szw/vim-maximizer" }) -- maximizes and restores current window
-
-	-- snippets
-	use({ "L3MON4D3/LuaSnip", "honza/vim-snippets" }) -- snippet engine
-	use({ "saadparwaiz1/cmp_luasnip" }) -- for autocompletion
-	use({ "rafamadriz/friendly-snippets" }) -- useful snippets
+    -- snippets
+    use({ "L3MON4D3/LuaSnip", "honza/vim-snippets" }) -- snippet engine
+    use({ "saadparwaiz1/cmp_luasnip" }) -- for autocompletion
+    use({ "rafamadriz/friendly-snippets" }) -- useful snippets
 
 	-- managing & installing lsp servers, linters & formatters
 	use({ "williamboman/mason.nvim" }) -- in charge of managing lsp servers, linters & formatters
@@ -212,7 +218,71 @@ return require("packer").startup(function(use)
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
     end}
-	if packer_bootstrap then
-		require("packer").sync()
-	end
+    use({
+        'norcalli/nvim-colorizer.lua',
+        config = function ()
+            require'colorizer'.setup()
+        end,
+    })
+    use {
+        'rmagatti/auto-session',
+        config = function()
+            require("auto-session").setup {
+                log_level = "error",
+                auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+                sections = {lualine_c = {require('auto-session-library').current_session_name}},
+            }
+        end
+    }
+    use({
+        'edluffy/specs.nvim',
+        config = function ()
+            require('specs').setup{
+                show_jumps = true,
+                min_jump = 10,
+                popup = {
+                    delay_ms = 0, -- delay before popup displays
+                    inc_ms = 10, -- time increments used for fade/resize effects
+                    blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                    width = 10,
+                    winhl = "PMenu",
+                    fader = require("specs").pulse_fader,
+                    resizer = require("specs").shrink_resizer,
+                },
+                ignore_filetypes = {},
+                ignore_buftypes = { nofile = true },
+            }
+        end,
+    })
+    -- Lua
+    use {
+        'abecodes/tabout.nvim',
+        config = function()
+            require('tabout').setup {
+                tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+                backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+                act_as_tab = true, -- shift content if tab out is not possible
+                act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+                default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+                default_shift_tab = '<C-d>', -- reverse shift default action,
+                enable_backwards = true, -- well ...
+                completion = true, -- if the tabkey is used in a completion pum
+                tabouts = {
+                    {open = "'", close = "'"},
+                    {open = '"', close = '"'},
+                    {open = '`', close = '`'},
+                    {open = '(', close = ')'},
+                    {open = '[', close = ']'},
+                    {open = '{', close = '}'}
+                },
+                ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+                exclude = {} -- tabout will ignore these filetypes
+            }
+        end,
+        wants = {'nvim-treesitter'}, -- or require if not used so far
+        after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
+    }
+    if packer_bootstrap then
+        require("packer").sync()
+    end
 end)
